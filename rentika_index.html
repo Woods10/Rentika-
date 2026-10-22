@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rentika | Find a Home in Kenya</title>
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+<!-- NAVIGATION -->
+
+<header>
+
+<div class="container nav">
+
+<a class="logo" href="#">
+Rent<span>ika</span>
+</a>
+
+<nav class="navlinks">
+<a href="#home">Home</a>
+<a href="#homes">Find a Home</a>
+
+<a href="#"
+onclick="openModal('messagesModal');return false">
+Messages
+</a>
+
+</nav>
+
+<div class="actions">
+
+<span id="userStatus"></span>
+
+<button
+class="btn btn-outline"
+id="signinBtn"
+onclick="openModal('loginModal')">
+Sign In
+</button>
+
+<button
+class="btn btn-outline"
+id="signupBtn"
+onclick="openModal('signupModal')">
+Sign Up
+</button>
+
+<button
+class="btn btn-green"
+onclick="openModal('listModal')">
++ List Property
+</button>
+
+<button
+class="menu"
+onclick="toggleMenu()">
+☰
+</button>
+
+</div>
+
+</div>
+
+</header>
+
+
+<!-- HERO -->
+
+<main id="home">
+
+<section class="hero">
+
+<div class="container hero-grid">
+
+<div>
+
+<div class="eyebrow">
+KENYA'S SMARTER WAY TO RENT
+</div>
+
+<h1>
+Find a place you'll love to call home.
+</h1>
+
+<p>
+Discover rooms, bedsitters, apartments, houses and Airbnb
+stays across Kenya. Search, save, list and chat directly.
+</p>
+
+<div class="searchbox">
+
+<input
+id="searchInput"
+placeholder="Search estate, town or property"
+>
+
+<select id="countySelect"></select>
+
+<select id="typeSelect"></select>
+
+<button onclick="searchHomes()">
+Search
+</button>
+
+</div>
+
+<div class="popular">
+
+<span>Popular:</span>
+
+<button onclick="quickCounty('Nairobi')">
+Nairobi
+</button>
+
+<button onclick="quickCounty('Mombasa')">
+Mombasa
+</button>
+
+<button onclick="quickCounty('Kisumu')">
+Kisumu
+</button>
+
+<button onclick="quickCounty('Uasin Gishu')">
+Uasin Gishu
+</button>
+
+</div>
+
+</div>
+
+
+<div class="hero-img">
+
+<div class="badge top">
+✓ Verified listings
+</div>
+
+<div class="badge bottom">
+🏠 Homes across Kenya
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- PROPERTY TYPES -->
+
+<section>
+
+<div class="container">
+
+<div class="section-head">
+
+<div>
+
+<h2>
+Search by property type
+</h2>
+
+<p>
+Choose what fits your budget and lifestyle.
+</p>
+
+</div>
+
+</div>
+
+<div
+class="categories"
+id="categories">
+</div>
+
+</div>
+
+</section>
+
+
+<!-- HOMES -->
+
+<section id="homes">
+
+<div class="container">
+
+<div class="section-head">
+
+<div>
+
+<h2>
+Homes you may like
+</h2>
+
+<p id="resultCount"></p>
+
+</div>
+
+</div>
+
+<div
+class="grid"
+id="propertyGrid">
+</div>
+
+</div>
+
+</section>
+
+
+<!-- TRUST -->
+
+<section class="trust">
+
+<div class="container">
+
+<div class="section-head">
+
+<div>
+
+<h2>
+Why Rentika?
+</h2>
+
+<p style="color:#d1dfda">
+Built for renters and landlords in Kenya.
+</p>
+
+</div>
+
+</div>
+
+
+<div class="trust-grid">
+
+<div class="trust-item">
+
+<div>🛡️</div>
+
+<h3>
+Trust first
+</h3>
+
+<p>
+Find verified-looking listings and clear property information.
+</p>
+
+</div>
+
+
+<div class="trust-item">
+
+<div>💬</div>
+
+<h3>
+Talk directly
+</h3>
+
+<p>
+Use Rentika messaging or WhatsApp to communicate.
+</p>
+
+</div>
+
+
+<div class="trust-item">
+
+<div>📍</div>
+
+<h3>
+Local by design
+</h3>
+
+<p>
+Search by county, estate, property type and monthly rent.
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+</main>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+<div class="container footer-grid">
+
+<div>
+
+<h3>Rentika</h3>
+
+<p>
+A Kenyan platform for finding and listing rental homes.
+</p>
+
+</div>
+
+<div>
+
+<h3>Explore</h3>
+
+<p>
+Find a Home<br>
+Saved Homes<br>
+Messages
+</p>
+
+</div>
+
+<div>
+
+<h3>For landlords</h3>
+
+<p>
+List your property<br>
+Reach local renters
+</p>
+
+</div>
+
+</div>
+
+</footer>
+
+
+<!-- PROPERTY DETAILS MODAL -->
+
+<div
+class="modal"
+id="propertyModal">
+
+<div class="modal-box">
+
+<button
+class="close"
+onclick="closeModal('propertyModal')">
+×
+</button>
+
+<div id="propertyDetails"></div>
+
+</div>
+
+</div>
+
+
+<!-- LIST PROPERTY -->
+
+<div
+class="modal"
+id="listModal">
+
+<div class="modal-box">
+
+<button
+class="close"
+onclick="closeModal('listModal')">
+×
+</button>
+
+<h2>
+List your property
+</h2>
+
+<p style="color:#6b7772">
+Add your rental so people can discover it on Rentika.
+</p>
+
+<form
+class="form"
+onsubmit="submitListing(event)">
+
+<input
+id="listTitle"
+required
+placeholder="Property title"
+>
+
+<input
+id="listTown"
+required
+placeholder="Estate / town"
+>
+
+<select
+id="listCounty"
+required>
+</select>
+
+<select
+id="listType"
+required>
+</select>
+
+<input
+id="listRent"
+type="number"
+required
+placeholder="Monthly rent (KSh)"
+>
+
+<input
+id="listPhone"
+type="tel"
+required
+placeholder="WhatsApp phone number e.g. 0712345678"
+>
+
+<textarea
+id="listDescription"
+required
+placeholder="Describe the property">
+</textarea>
+
+<button
+class="btn btn-green">
+Publish Property
+</button>
+
+</form>
+
+</div>
+
+</div>
+
+
+<!-- SIGN IN -->
+
+<div
+class="modal"
+id="loginModal">
+
+<div class="modal-box">
+
+<button
+class="close"
+onclick="closeModal('loginModal')">
+×
+</button>
+
+<h2>
+Sign in to Rentika
+</h2>
+
+<p style="color:#6b7772">
+Use your phone number and password.
+</p>
+
+<form
+class="form"
+onsubmit="login(event)">
+
+<div class="phone-wrap">
+
+<select id="loginCode">
+<option>+254</option>
+<option>+211</option>
+<option>+249</option>
+</select>
+
+<input
+id="loginPhone"
+type="tel"
+pattern="[0-9]{9}"
+required
+placeholder="712345678"
+>
+
+</div>
+
+<input
+id="loginPassword"
+type="password"
+minlength="6"
+required
+placeholder="Password"
+>
+
+<button
+class="btn btn-green">
+Sign In
+</button>
+
+</form>
+
+<div class="auth-switch">
+
+Don't have an account?
+
+<button
+onclick="switchAuth('loginModal','signupModal')">
+Sign Up
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- SIGN UP -->
+
+<div
+class="modal"
+id="signupModal">
+
+<div class="modal-box">
+
+<button
+class="close"
+onclick="closeModal('signupModal')">
+×
+</button>
+
+<h2>
+Create your Rentika account
+</h2>
+
+<p style="color:#6b7772">
+Create an account using your phone number and password.
+</p>
+
+<form
+class="form"
+onsubmit="signup(event)">
+
+<input
+id="signupName"
+required
+placeholder="Full name"
+>
+
+<div class="phone-wrap">
+
+<select id="signupCode">
+
+<option>+254</option>
+<option>+211</option>
+<option>+249</option>
+
+</select>
+
+<input
+id="signupPhone"
+type="tel"
+pattern="[0-9]{9}"
+required
+placeholder="712345678"
+>
+
+</div>
+
+<input
+id="signupPassword"
+type="password"
+minlength="6"
+required
+placeholder="Create password"
+>
+
+<input
+id="signupConfirm"
+type="password"
+minlength="6"
+required
+placeholder="Confirm password"
+>
+
+<button
+class="btn btn-green">
+Create Account
+</button>
+
+</form>
+
+<div class="auth-switch">
+
+Already have an account?
+
+<button
+onclick="switchAuth('signupModal','loginModal')">
+Sign In
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- MESSAGES -->
+
+<div
+class="modal"
+id="messagesModal">
+
+<div class="modal-box">
+
+<button
+class="close"
+onclick="closeModal('messagesModal')">
+×
+</button>
+
+<h2>
+Rentika Messages
+</h2>
+
+<div class="chat-layout">
+
+<div class="convos">
+
+<div class="convo active">
+🏠 Landlord
+</div>
+
+<div class="convo">
+🏠 Property owner
+</div>
+
+</div>
+
+
+<div class="messages">
+
+<div class="msg">
+Hello! Is the house still available?
+</div>
+
+<div class="msg me">
+Yes, it is available. You can arrange a viewing.
+</div>
+
+<div class="message-send">
+
+<input
+id="messageInput"
+placeholder="Write a message..."
+>
+
+<button
+class="btn btn-green"
+onclick="sendMessage()">
+Send
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>
